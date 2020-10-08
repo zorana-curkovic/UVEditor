@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using UnityEngine;
 using UnityEditor;
 
@@ -9,6 +10,7 @@ public class UVMeshRenderer
     private static Material s_UVMaterial;
     //private List<Vector3> points;
     //private Matrix4x4 transform;
+    private Vector2[] m_UVs;
     private Vector2[] m_vertices;
     private Vector2 m_scale;
     private Vector2 m_offset;
@@ -16,23 +18,19 @@ public class UVMeshRenderer
     private List<List<int>> m_edges;
 
 
-
-    public UVMeshRenderer(Vector2 mScale, Vector2 mOffset, Vector2 mPointSize)
-    {
-        m_scale = mScale;
-        m_offset = mOffset;
-        m_pointSize = mPointSize;
-        
+    //public UVMeshRenderer()
+    //{
         //Vector2 m_Translation = new Vector2(0, 0);
         //Vector2 m_Scale = new Vector2(1, -1);
         //transform = Matrix4x4.TRS(m_Translation, Quaternion.identity, new Vector3(m_Scale.x, m_Scale.y, 1));
         //points = new List<Vector3>();
-    }
+    //}
 
     public void Clear()
     {
         m_vertices = null;
-        //points.Clear();
+        m_UVs = null;
+        m_edges = null;
     }
 
     public Vector2 Offset
@@ -44,23 +42,38 @@ public class UVMeshRenderer
     public Vector2 Scale
     {
         get => m_scale;
-        set => m_scale = value;
+        set { 
+            m_scale = value;
+            ScaleVertices();
+        }
+    }
+
+    public Vector2 PointSize
+    {
+        get => m_pointSize;
+        set
+        {
+            m_pointSize = value;
+        }
     }
 
     public void SetPoints(Vector2[] UVs)
     {
-        m_vertices = UVs;
-        
-        for (int i = 0; i < m_vertices.Length; ++i)
+        m_UVs = UVs;
+        m_vertices = new Vector2[UVs.Length];
+        ScaleVertices();
+    }
+
+    private void ScaleVertices()
+    {
+        for (int i = 0; i < m_UVs.Length; ++i)
         {
-            m_vertices[i] = m_offset + (m_vertices[i] * m_scale);
+            m_vertices[i] = m_offset + (m_UVs[i] * m_scale);
         }
     }
 
     public void GenerateEdges(int[] triangles)
     {
-        Debug.Log("Set Triangles");
-        
         m_edges = new List<List<int>>();
         
         for (int i = 0; i < m_vertices.Length; ++i)

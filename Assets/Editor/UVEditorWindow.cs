@@ -15,12 +15,9 @@ public class UVEditorWindow : EditorWindow
     private Mesh m_Mesh;
     private int m_vertexCount;
     private Vector2[] m_UV1;
-    private Vector2 rendererOffset = new Vector2(250,300);
-    private Vector2 rendererScale = new Vector2(100, 100);
     private Vector2 rendererPointSize = new Vector2(3,3);
     private UVMeshRenderer m_uvMeshRenderer;
     
-    //private GUIStyle _boxStyle;
     [MenuItem("Window/Rendering/UVEditor")]
     static void Init()
     {
@@ -35,21 +32,39 @@ public class UVEditorWindow : EditorWindow
 
     public void OnSelectionChange()
     {
+        if (m_uvMeshRenderer != null)
+        {
+            m_uvMeshRenderer.Clear();
+            m_uvMeshRenderer = null;
+        }
+        
         Object activeObject = Selection.activeObject;
         GameObject activeGameObject = activeObject as GameObject;
-        MeshFilter activeMesh = activeObject as MeshFilter;
+        m_GO = null;
+        m_Mesh = null;
 
         if (activeGameObject != null)
         {
             m_GO = activeGameObject;
 
-            MeshFilter filter = m_GO.GetComponent<MeshFilter>();
-            m_Mesh = null;
+            MeshFilter filter = m_GO.GetComponentInChildren<MeshFilter>();
             
-            if (filter != null)
+
+            if (filter == null)
+            {
+                SkinnedMeshRenderer smr = m_GO.GetComponentInChildren<SkinnedMeshRenderer>();
+               
+                if (smr != null)
+                    m_Mesh = smr.sharedMesh;
+            }
+            else
             {
                 m_Mesh = filter.sharedMesh;
-
+            }
+            
+            
+            if (m_Mesh != null)
+            {
                 m_vertexCount = m_Mesh.vertexCount;
                 m_UV1 = m_Mesh.uv;
                 selectedMeshText = "#" + m_vertexCount.ToString() + "=";
@@ -62,23 +77,12 @@ public class UVEditorWindow : EditorWindow
                 }
                 else
                 {
-                    rendererScale = new Vector2(100, 100);
-                    rendererOffset = new Vector2(400, 300);
-
-                    m_uvMeshRenderer = new UVMeshRenderer(rendererScale, rendererOffset, rendererPointSize);
+                    m_uvMeshRenderer = new UVMeshRenderer();
                     m_uvMeshRenderer.SetPoints(m_UV1);
                     m_uvMeshRenderer.GenerateEdges(m_Mesh.triangles);
                 }
             }
-            else
-            {
-                if (m_uvMeshRenderer != null)
-                {
-                    m_uvMeshRenderer.Clear();
-                    m_uvMeshRenderer = null;
-                }
-            }
-            
+
         }
 
 
@@ -102,23 +106,31 @@ public class UVEditorWindow : EditorWindow
  
 
         EditorGUILayout.Space(20);
-        EditorGUILayout.LabelField("Selected Object", selectedObjectText,EditorStyles.boldLabel);
-        EditorGUILayout.LabelField("Selected Mesh", selectedMeshText);
+        EditorGUILayout.LabelField("  Selected Object ", selectedObjectText,EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("  Selected Mesh ", selectedMeshText);
 
         //_boxStyle = new GUIStyle();
+        float WindowSize = Mathf.Min(position.width, position.height) - 100;
+        float WindowSizeHalf = WindowSize / 2;
+
+        float UVScale = WindowSize - 100;
+        float UVScaleHalf = UVScale / 2;
         
         // Constrain all drawing to be within a 800x600 pixel area centered on the screen.
-       GUI.BeginGroup(new Rect(Screen.width / 2 - 400, Screen.height / 2 - 300, 800, 600));
+       GUI.BeginGroup(new Rect(50,  100, WindowSize, WindowSize));
 
         // Draw a box in the new coordinate space defined by the BeginGroup.
         // Notice how (0,0) has now been moved on-screen
-       // GUI.Box(new Rect(0, 0, 800, 600), "This box is now centered! - here you would put your main menu");
+       GUI.Box(new Rect(0, 0, WindowSize, WindowSize), "");
 
         // We need to match all BeginGroup calls with an EndGroup
        
         if (m_uvMeshRenderer != null)
         {
-            m_uvMeshRenderer.Offset = new Vector2(400, 300);
+            
+            m_uvMeshRenderer.Offset = new Vector2(WindowSizeHalf, WindowSizeHalf);
+            m_uvMeshRenderer.Scale = new Vector2(UVScale, UVScale);
+            m_uvMeshRenderer.PointSize = new Vector2(UVScale/250, UVScale/250);
             m_uvMeshRenderer.DrawUVMesh();
         }
         

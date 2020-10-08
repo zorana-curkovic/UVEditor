@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d557ec3b-d65d-4388-bf9e-0192b8fafe99" name="Default Changelist" comment="" />
+    <list default="true" id="d557ec3b-d65d-4388-bf9e-0192b8fafe99" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.UVEditor/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UVEditor/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.UVEditor/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UVEditor/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.UVEditor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UVEditor/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/0307d3a5dc50cef9516e9820caf6ccce.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/0307d3a5dc50cef9516e9820caf6ccce.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Checker.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Checker.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor/UVEditorWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/UVEditorWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor/UVMeshRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/UVMeshRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/cube.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/cube.fbx.meta" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Editor/UVMeshRenderer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -20,6 +36,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1iNKa6A27BqoQywXyq9oPYZpW0c" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -65,6 +82,8 @@
       <workItem from="1601744348229" duration="61000" />
       <workItem from="1601744435108" duration="12783000" />
       <workItem from="1601800449056" duration="9268000" />
+      <workItem from="1602155466093" duration="7481000" />
+      <workItem from="1602180000182" duration="539000" />
     </task>
     <servers />
   </component>
