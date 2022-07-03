@@ -74,6 +74,7 @@ public class UVMeshRenderer
 
     public void GenerateEdges(int[] triangles)
     {
+        Debug.Log("sth");
         m_edges = new List<List<int>>();
         
         for (int i = 0; i < m_vertices.Length; ++i)
